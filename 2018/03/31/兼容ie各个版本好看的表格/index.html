@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="C360_2014-11-27-18-43-39-386">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js 表格," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="实现好看的表格  1.首先需要一个div 和table,并且把表头做好,在thead标签下 简要表头 &amp;lt;div class=&amp;quot;sort&amp;quot; id=&amp;quot;taskquery1&amp;quot; style=&amp;quot;display: none; position: absolute;height: 350px;&amp;quot;&amp;gt;             &amp;lt;table">
+<meta name="keywords" content="js 表格">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现好看的表格">
+<meta property="og:url" content="http://gaoxin1314.github.io/2018/03/31/兼容ie各个版本好看的表格/index.html">
+<meta property="og:site_name" content="gaoxin&#39;s blog">
+<meta property="og:description" content="实现好看的表格  1.首先需要一个div 和table,并且把表头做好,在thead标签下 简要表头 &amp;lt;div class=&amp;quot;sort&amp;quot; id=&amp;quot;taskquery1&amp;quot; style=&amp;quot;display: none; position: absolute;height: 350px;&amp;quot;&amp;gt;             &amp;lt;table">
+<meta property="og:image" content="https://i.imgur.com/KhjeEyG.gif">
+<meta property="og:updated_time" content="2018-04-04T13:43:20.973Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实现好看的表格">
+<meta name="twitter:description" content="实现好看的表格  1.首先需要一个div 和table,并且把表头做好,在thead标签下 简要表头 &amp;lt;div class=&amp;quot;sort&amp;quot; id=&amp;quot;taskquery1&amp;quot; style=&amp;quot;display: none; position: absolute;height: 350px;&amp;quot;&amp;gt;             &amp;lt;table">
+<meta name="twitter:image" content="https://i.imgur.com/KhjeEyG.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://gaoxin1314.github.io/2018/03/31/兼容ie各个版本好看的表格/"/>
+
+
+
+
+
+  <title>实现好看的表格 | gaoxin's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bf643417c950b107afb4d141162d91ae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="C360_2014-11-27-18-43-39-386">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">gaoxin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">gaoxin's blog</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Suche
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoxin1314.github.io/2018/03/31/兼容ie各个版本好看的表格/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="高鑫">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/gaoxin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gaoxin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">实现好看的表格</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T13:21:08+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="实现好看的表格"><a href="#实现好看的表格" class="headerlink" title="实现好看的表格"></a>实现好看的表格</h1><hr>
+<p><img src="https://i.imgur.com/KhjeEyG.gif" alt=""></p>
+<h1 id="1-首先需要一个div-和table-并且把表头做好-在thead标签下"><a href="#1-首先需要一个div-和table-并且把表头做好-在thead标签下" class="headerlink" title="1.首先需要一个div 和table,并且把表头做好,在thead标签下"></a>1.首先需要一个div 和table,并且把表头做好,在thead标签下</h1><p> 简要表头</p>
+<pre><code>&lt;div class=&quot;sort&quot; id=&quot;taskquery1&quot; style=&quot;display: none; position: absolute;height: 350px;&quot;&gt;
+            &lt;table id=&quot;simpleLineTable&quot; class=&quot;fix_table&quot; style=&quot;width: 1300px; border-top-color: black;&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;border-right-color: black;&quot;&gt;序号&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;&quot;&gt;机构&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprem&apos;,2,1)&quot;&gt;互动渠道保费&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdpremcompletionrate&apos;,3,1)&quot;&gt;完成率&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprempercentage&apos;,4,1)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;comparison&apos;,5,1)&quot;&gt;与平均增速相比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;rate&apos;,6,1)&quot;&gt;占公司业务比重&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprem&apos;,7,1)&quot;&gt;引导业务保费&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprempercentage&apos;,8,1)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprem&apos;,9,1)&quot;&gt;合计保费&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprempercentage&apos;,10,1)&quot;&gt;同比&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+</code></pre><p>全景表头</p>
+<pre><code>&lt;div class=&quot;sort&quot; id=&quot;taskquery&quot; style=&quot;display: none; position: absolute;height: 350px;&quot;&gt;
+            &lt;!--         style=&quot;display: none;&lt;div class=&quot;autoScroll&quot; style=&quot;width: 100%;&quot; &gt; --&gt;
+            &lt;!-- &lt;div style=&quot;text-align: right;&quot; class=&quot;autoScroll&quot;&gt; 单位：万元 &lt;/div&gt; --&gt;
+            &lt;table id=&quot;lineTable&quot; class=&quot;fix_table&quot; style=&quot;width: 1600px; border-top-color: black;&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1;border-right-color: black; &quot;&gt;&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1; &quot;&gt;&lt;/td&gt;
+                        &lt;td colspan=&quot;6&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;height: 25px;background-color: #dce6f1;&quot;&gt;互动渠道&lt;/td&gt;
+                        &lt;td colspan=&quot;14&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;height: 25px;background-color: #dce6f1&quot;&gt;引导业务&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        &gt;&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        &gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+
+                    &lt;tr&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1;border-right-color: black; &quot;&gt;序号&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1; &quot;&gt;机构&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdrsprem&apos;,102)&quot;&gt;寿险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdrsprempercentage&apos;,103)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdjkprem&apos;,104)&quot;&gt;健康险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdjkpercentage&apos;,105)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprem&apos;,106)&quot;&gt;合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprempercentage&apos;,107)&quot;&gt;同比&lt;/td&gt;
+
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxrsprem&apos;,108)&quot;&gt;引导电销寿险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxrspercentage&apos;,109)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxjkprem&apos;,110)&quot;&gt;引导电销健康&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxjkpercentage&apos;,111)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxprem&apos;,112)&quot;&gt;引导电销合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxpercentage&apos;,113)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxrsprem&apos;,114)&quot;&gt;引导网销寿险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxrspercentage&apos;,115)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxjkprem&apos;,116)&quot;&gt;引导网销健康&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxjkpercentage&apos;,117)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxprem&apos;,118)&quot;&gt;引导网销合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxpercentage&apos;,119)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprem&apos;,120)&quot;&gt;引导业务合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprempercentage&apos;,121)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprem&apos;,122)&quot;&gt;总计&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprempercentage&apos;,123)&quot;&gt;同比&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+</code></pre><h2 id="2异步查询数据-将数据放入一个list集合中返回并调用gridTrLine-result-array-result是数据-array是列字段也就是对象的属性"><a href="#2异步查询数据-将数据放入一个list集合中返回并调用gridTrLine-result-array-result是数据-array是列字段也就是对象的属性" class="headerlink" title="2异步查询数据,将数据放入一个list集合中返回并调用gridTrLine(result, array),result是数据,array是列字段也就是对象的属性"></a>2异步查询数据,将数据放入一个list集合中返回并调用gridTrLine(result, array),result是数据,array是列字段也就是对象的属性</h2><pre><code>/**
+ *  lineTable table的id必须需要
+    公共方法,为表格添加栅格
+    result:需要添加的对象
+    array:对象的属性数组
+    conFirstArray:是固定竖列第一列显示数组
+    isHengShu:是否横竖,bool类型,true是横向是一个对象,false是纵向是一个对象
+ */
+function gridTrLine(result,array,conFirstArray,isHengShu){
+
+    var len = array.length;
+    var isThreeNotEmpty = null;
+    var isFourNotEmpty = false;
+    //添加表格行
+    var size = result.data.length;
+
+    var indexy = 0;
+    var indexz = 0;
+    //判断是否有第3个参数,是否需要固定列,如果有则把isThreeNotEmpty等于了第3个参数
+     if(arguments.length &gt;= 3){
+         if(conFirstArray != null){
+             isThreeNotEmpty = conFirstArray;
+             size = conFirstArray.length;
+         }
+    } 
+    //判断是否有第4个参数,是否是竖的放数,如果有则把isFourNotEmpty等于了第4个参数
+    if(arguments.length == 4){
+        if(isHengShu == true){
+            isFourNotEmpty = true;
+            len = result.data.length;
+        }
+    }
+
+    for(var i=0;i&lt;size;i++){
+
+
+        var str = &apos;&lt;tr name=&quot;gridTr&quot; id=&quot;row[&apos;+i+&apos;]&quot; &apos;+(i%2==0?&apos;style=&quot;background-color:#FFFFFF&quot;&apos;:&apos;style=&quot;background-color:#E9E9E9&quot;&apos;)+&apos;&gt;&apos;;
+        for(var con = 0 ; con&lt;len ; con++){
+                    indexy = i;
+                    indexz = con;
+                    //如果isHengShu是true,则竖的放数据,将i和con互换位置
+                    if(isFourNotEmpty){
+                        indexy = con;
+                        indexz = i;
+                    }
+
+                    if(con == 0){
+                        /* 添加第一列和第二列的数值 */
+
+                        str += (&apos;&lt;td align=&quot;center&quot; style=&quot;height: 24px;border: 1px  solid #ccc;&apos;+
+                        &apos;font-weight: 900 ;&quot; nowrap=&quot;nowrap&quot;&gt;&apos;+
+                            (isThreeNotEmpty==null?(i):isThreeNotEmpty[i]) +
+                        &apos;&lt;/td&gt;&apos;+
+
+                         &apos;&lt;td align=&quot;center&quot; style=&quot;height: 24px;border: 1px solid #ccc;text-align: center;&apos;+
+                        &apos;&apos;+
+                        (isThreeNotEmpty!=null?&apos;&apos;:&apos;font-weight: 900 ;&apos;)+
+                            &apos;&quot; nowrap=&quot;nowrap&quot; id=&quot;cr[&apos;+indexy+&apos;][&apos;+indexz+&apos;]&quot;&gt;&apos;+
+                            (result.data[indexy][(array[indexz])]==null?&quot;&quot;:result.data[indexy][(array[indexz])])+
+                        &apos;&lt;/td&gt;&apos;)
+                        }
+
+                    else{
+                        /* 添加剩下的数值 */
+                        str+=(&apos;&lt;td align=&quot;center&quot; style=&quot;height: 24px;border: 1px solid #ccc;&apos;+
+                        &apos;&quot; nowrap=&quot;nowrap&quot;&gt;&apos;+
+                            &apos;&lt;span id=&quot;cr[&apos;+indexy+&apos; ][&apos;+indexz+&apos;]&quot;&gt;&apos;+
+                            (result.data[indexy][(array[indexz])]==null?&quot;&quot;:result.data[indexy][(array[indexz])])+&apos;&lt;/span&gt;&apos;+
+                        &apos;&lt;/td&gt;&apos;)
+                        }
+
+
+
+
+        }
+        str+=&apos;&lt;/tr&gt;&apos;;
+        $(&quot;#lineTable&quot;).append(str);
+    }
+}
+//删除grid方法
+function delGridTrLine(){
+    if($(&quot;tr[name=gridTr]&quot;) != null){
+        $(&quot;tr[name=gridTr]&quot;).remove();
+    }
+}
+</code></pre><h2 id="3固定表头和列FixTable-“lineTable”-2-width-340"><a href="#3固定表头和列FixTable-“lineTable”-2-width-340" class="headerlink" title="3固定表头和列FixTable(“lineTable”, 2, width, 340);"></a>3固定表头和列FixTable(“lineTable”, 2, width, 340);</h2><pre><code>/**
+ * 固定行和列
+ */
+    function FixTable(TableID, FixColumnNumber, width, height) {
+    /// &lt;summary&gt;
+    /// 锁定表头和列
+    /// &lt;para&gt; sorex.cnblogs.com &lt;/para&gt;
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;TableID&quot; type=&quot;String&quot;&gt;
+    /// 要锁定的Table的ID
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;FixColumnNumber&quot; type=&quot;Number&quot;&gt;
+    /// 要锁定列的个数
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;width&quot; type=&quot;Number&quot;&gt;
+    /// 显示的宽度
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;height&quot; type=&quot;Number&quot;&gt;
+    /// 显示的高度
+    /// &lt;/param&gt;
+    if ($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).length != 0) {
+    $(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).before($(&quot;#&quot; + TableID));
+    $(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).empty();
+    }
+    else {
+    $(&quot;#&quot; + TableID).after(&quot;&lt;div id=&apos;&quot; + TableID + &quot;_tableLayout&apos; style=&apos;overflow:hidden;height:&quot; + height + &quot;px; width:&quot; + width + &quot;px;&apos;&gt;&lt;/div&gt;&quot;);
+    }
+    $(&apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableFix&quot;&gt;&lt;/div&gt;&apos;
+    + &apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableHead&quot;&gt;&lt;/div&gt;&apos;
+    + &apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableColumn&quot;&gt;&lt;/div&gt;&apos;
+    + &apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableData&quot;&gt;&lt;/div&gt;&apos;).appendTo(&quot;#&quot; + TableID + &quot;_tableLayout&quot;);
+    var oldtable = $(&quot;#&quot; + TableID);
+    var tableFixClone = oldtable.clone(true);
+    tableFixClone.attr(&quot;id&quot;, TableID + &quot;_tableFixClone&quot;);
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).append(tableFixClone);
+    var tableHeadClone = oldtable.clone(true);
+    tableHeadClone.attr(&quot;id&quot;, TableID + &quot;_tableHeadClone&quot;);
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).append(tableHeadClone);
+    var tableColumnClone = oldtable.clone(true);
+    tableColumnClone.attr(&quot;id&quot;, TableID + &quot;_tableColumnClone&quot;);
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).append(tableColumnClone);
+
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).append(oldtable);
+
+    //设置外边框为0
+    $(&quot;#&quot; + TableID + &quot;_tableLayout table&quot;).each(function () {
+    $(this).css(&quot;margin&quot;, &quot;0&quot;);
+    });
+
+    //设置固定行div的高度,和fix div的高
+    var HeadHeight = $(&quot;#&quot; + TableID + &quot;_tableHead thead&quot;).height();
+    HeadHeight += 2;
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).css(&quot;height&quot;, HeadHeight);
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).css(&quot;height&quot;, HeadHeight);
+
+
+    var ColumnsWidth = 0;
+    var ColumnsNumber = 0;
+
+    //获取宽度
+    $(&quot;#&quot; + TableID + &quot;_tableColumn tr:last td:lt(&quot; + FixColumnNumber + &quot;)&quot;).each(function () {
+    ColumnsWidth += $(this).outerWidth(true);
+    ColumnsNumber++;
+    });
+    ColumnsWidth += 2;
+    if ($.browser.msie) {
+    switch ($.browser.version) {
+    case &quot;7.0&quot;:
+    if (ColumnsNumber &gt;= 3) ColumnsWidth--;
+    break;
+    case &quot;8.0&quot;:
+    if (ColumnsNumber &gt;= 2) ColumnsWidth--;
+    break;
+    }
+    }
+    //fix div和列div的宽度
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).css(&quot;width&quot;, ColumnsWidth);
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).css(&quot;width&quot;, ColumnsWidth);
+
+    //tableHead和tableColumn添加联动的滚动条事件
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).scroll(function () {
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).scrollLeft($(&quot;#&quot; + TableID + &quot;_tableData&quot;).scrollLeft());
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).scrollTop($(&quot;#&quot; + TableID + &quot;_tableData&quot;).scrollTop());
+    });
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).css({ &quot;overflow&quot;: &quot;hidden&quot;, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;50&quot;, &quot;background-color&quot;: &quot;Silver&quot; });
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).css({ &quot;overflow&quot;: &quot;hidden&quot;, &quot;width&quot;: width - 17, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;45&quot;, &quot;background-color&quot;: &quot;Silver&quot; });
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).css({ &quot;overflow&quot;: &quot;hidden&quot;, &quot;height&quot;: height - 17, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;40&quot;, &quot;background-color&quot;: &quot;#FFFFFF&quot; });
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).css({ &quot;overflow&quot;: &quot;scroll&quot;, &quot;width&quot;: width, &quot;height&quot;: height, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;35&quot; });
+    if ($(&quot;#&quot; + TableID + &quot;_tableHead&quot;).width() &gt; $(&quot;#&quot; + TableID + &quot;_tableFix table&quot;).width()) {
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).css(&quot;width&quot;, $(&quot;#&quot; + TableID + &quot;_tableFix table&quot;).width());
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).css(&quot;width&quot;, $(&quot;#&quot; + TableID + &quot;_tableFix table&quot;).width() + 17);
+    }
+    if ($(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).height() &gt; $(&quot;#&quot; + TableID + &quot;_tableColumn table&quot;).height()) {
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).css(&quot;height&quot;, $(&quot;#&quot; + TableID + &quot;_tableColumn table&quot;).height());
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).css(&quot;height&quot;, $(&quot;#&quot; + TableID + &quot;_tableColumn table&quot;).height() + 17);
+    }
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    }
+</code></pre><h2 id="4排序方法tableListSort-obj-arrField-arrnum-simpFalg"><a href="#4排序方法tableListSort-obj-arrField-arrnum-simpFalg" class="headerlink" title="4排序方法tableListSort(obj,arrField,arrnum,simpFalg);"></a>4排序方法tableListSort(obj,arrField,arrnum,simpFalg);</h2><pre><code>var tableData;//需要赋值查询出的数据
+var sorFlag = 0;
+var clickText = null;
+var clickNum = 0;
+var clickFlag = 0;
+var arrnumOld;
+var arrayField;//需要赋值查询出列
+
+    function tableListSort(obj,arrField,arrnum,simpFalg){
+        debugger;
+        var NameID;
+        var initNum = arrnum;
+        if(simpFalg){
+            NameID = &quot;simpleLineTable&quot;;
+            trNum = 0;
+            simpleDelGridTrLine();
+        }else{
+            NameID = &quot;lineTable&quot;;
+            trNum = 1;
+            delGridTrLine();
+            arrnum = arrnum -100;
+        }
+        var container = $(&quot;#&quot; + NameID + &quot;_tableData&quot;);
+        var scrollLeftSite = container.scrollLeft();
+        if(clickFlag == 0){
+            clickFlag = 1;
+            $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+            $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+            $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+            $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+        /*     $(&quot;#&quot; + NameID + &quot; tr:eq(1)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;); */
+            //点击别框重置
+            if(clickText != null){
+                if(arrnumOld != initNum){
+                    var initNumInside;
+                    if(arrnumOld &gt; 100){
+                        initNumInside = arrnumOld -100;
+                    }else{
+                        initNumInside = arrnumOld;
+                    }
+                    $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+initNumInside+&quot;)&quot;).html(clickText);
+                    clickNum = 0;
+                    sorFlag = 0;
+                }
+            }
+            arrnumOld = initNum;
+            //获取表头内容
+            if(clickNum == 0){
+                clickText =  obj.innerHTML;
+                clickNum = 1;
+            }
+            //合计不排序
+            var total = tableData.data.shift();
+            //排序方向控制
+            tableData.data.sort(function(a,b){
+                if(sorFlag == 0){
+                    var c = a;
+                    a = b;
+                    b = c;
+                }
+    return parseFloat((a[arrField]==null || a[arrField]==&quot;&quot;)?-999999:a[arrField])-parseFloat((b[arrField]==null || b[arrField]==&quot;&quot;)?-999999:b[arrField]);
+    });
+            tableData.data.unshift(total);
+
+            //改变表头内容
+            if(sorFlag == 0){
+                sorFlag = 1;
+                $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).html(clickText+&quot;↓&quot;);
+            }else{
+                sorFlag = 0;
+                $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).html(clickText+&quot;↑&quot;);
+            }
+            if(simpFalg){
+                simpleGridTrLine(tableData, arrayField);
+                var width = $(&quot;#taskquery1&quot;).width() - 20;
+                $(&quot;#simpleLineTable&quot;).width(width);
+                $(&quot;#simpleLineTable tr:eq(1) td&quot;).width(width / 10);
+                FixTable(&quot;simpleLineTable&quot;, 2, width, 340);
+                $(&quot;#simpleLineTable_tableData&quot;).css({
+                    &quot;overflow-x&quot; : &quot;hidden&quot;,
+                    &quot;overflow-y&quot; : &quot;auto&quot;
+                });
+
+            }else{
+                gridTrLine(tableData,arrayField);
+                //div的宽度
+                var width = $(&quot;#taskquery&quot;).width()-20;
+                //为table的设置宽度
+                $(&quot;#&quot; + NameID + &quot;&quot;).width(width*24/12) ;
+                //为table第一行的td设置宽度
+                $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td&quot;).width(width/12);
+                FixTable(NameID,2,width,340);
+                $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+                $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+                $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+                $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+
+
+
+                var container = $(&quot;#&quot; + NameID + &quot;_tableData&quot;);
+                container.scrollLeft(scrollLeftSite);
+
+            }
+
+
+            /* container.animate({
+            scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+            }); */
+
+            clickFlag = 0;
+        }
+
+    }
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpg" alt="高鑫 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/aipay.jpg" alt="高鑫 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js-表格/" rel="tag"># js 表格</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/18/shell脚本/" rel="next" title="shell脚本">
+                <i class="fa fa-chevron-left"></i> shell脚本
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/31/java内存区域/" rel="prev" title="java内存区域(内存结构划分)">
+                java内存区域(内存结构划分) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+       
+         <div onclick="ShowGitment()" id="gitment-display-button">Show comments from Gitment</div>
+         <div id="gitment-container" style="display:none"></div>
+       
+
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/gaoxin.jpg"
+               alt="高鑫" />
+          <p class="site-author-name" itemprop="name">高鑫</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Kategorien</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/gaoxin1314.github.io" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/gao-xin-37-77-23" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实现好看的表格"><span class="nav-number">1.</span> <span class="nav-text">实现好看的表格</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-首先需要一个div-和table-并且把表头做好-在thead标签下"><span class="nav-number">2.</span> <span class="nav-text">1.首先需要一个div 和table,并且把表头做好,在thead标签下</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2异步查询数据-将数据放入一个list集合中返回并调用gridTrLine-result-array-result是数据-array是列字段也就是对象的属性"><span class="nav-number">2.1.</span> <span class="nav-text">2异步查询数据,将数据放入一个list集合中返回并调用gridTrLine(result, array),result是数据,array是列字段也就是对象的属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3固定表头和列FixTable-“lineTable”-2-width-340"><span class="nav-number">2.2.</span> <span class="nav-text">3固定表头和列FixTable(“lineTable”, 2, width, 340);</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4排序方法tableListSort-obj-arrField-arrnum-simpFalg"><span class="nav-number">2.3.</span> <span class="nav-text">4排序方法tableListSort(obj,arrField,arrnum,simpFalg);</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高鑫</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+   
+   
+   
+   
+   <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+   
+       <script type="text/javascript">
+           function ShowGitment(){
+               document.getElementById("gitment-display-button").style.display = "none";
+               document.getElementById("gitment-container").style.display = "block";
+               var gitment = new Gitment({
+                   id: document.location.href, 
+                   owner: 'gaoxin1314',
+                   repo: 'fantastic.github.io',
+                   oauth: {
+                       client_id: '90662e32c692de1965a2',
+                       client_secret: 'dac6732a7af5c7a964349db8ea2b3afd11709120',
+                   }});
+               gitment.render('gitment-container');
+           }
+       </script>
+   
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

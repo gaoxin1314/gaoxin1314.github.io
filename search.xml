@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[Bourne shell编程]]></title>
+      <url>/2018/03/31/Bourne-shell%E7%BC%96%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<h1 id="Bourne-shell-编程"><a href="#Bourne-shell-编程" class="headerlink" title="Bourne shell 编程"></a>Bourne shell 编程</h1><hr>
+<p> 1.#!被称为幻数,位于脚本第一行</p>
+<p> 2.创建文件时,并不会授予文件的执行权限,如果要运行脚本,就必须指定它的权限,可以用chmod命令来设置脚本的执行权限</p>
+<p> 3.red用于从终端或文件读取输入</p>
+<p> 4.set命令重置位置参量</p>
+<p> 5.特殊变量修饰符(:?)将检查$1是否有值,如果$1无值,则打印指定信息并退出</p>
+<p> 6.$<em>和$@区别:仅在被双引号来时有区别,$</em>被括在双引号中时,位置参量列表就变成单个字符串.而$@被括在双引号中时,每个位置参量都被加上引号,也就是说,每个词是一个单独的字符串</p>
+<p> 7.grep命令在文件中查找</p>
+<p> 8.变量$?包含shell执行的上一天命令的退出状态</p>
+<p> 9.test也会返回一个退出状态</p>
+<p> 10.成功为0,失败非0</p>
+<p> 11.[  ]是test命令的另一种表现方式,中间内容必须要用空格于[ 隔开</p>
+<p> 12.&amp;后台执行循环</p>
+<p> 13.exec命令改版标准输入,使标准不在来自键盘而是文件</p>
+<p> 14.IFS,shell内部字段分隔符空格,制表符,换行符.如需其他则重新定义IFS</p>
+<p> 15.函数常常被定义在profile文件中,这样,用登入系统时,函数就被自动定义.函数不能被导出,但可以保存到一个文件中.所以,当需要某个函数时,只要用文件名作为参数,使用dot命令来调用改文件中定义的函数就可以了</p>
+<p> 16.dbaccess 通过sql语句对数据库进行操作<a href="http://www.doc88.com/p-236794939983.html" target="_blank" rel="external">http://www.doc88.com/p-236794939983.html</a></p>
+<p> 17.set isolation to dirty read,脏读,在可以忽略查询时对所操作数据发生的改动对查询结果的影响时可以使用脏读<br> set lock mode to wait 25 如果当前表被锁设置等待表锁25秒,如果还是锁..报错</p>
+<p> 18.nvl表达式nvl(表达式1,表达式2),如果表达1是空,则返回表达2的值,否则返回表达式1的值</p>
+<p> 19.load和unload工具<br> 导出文本unload to 文件名.unl select * from 表名<br> 导入文本:load from 文件名.unl insert into 表名</p>
+<p> 20.输入输出:&gt;输出  &gt;输入  &gt;&gt;追加输出</p>
+<p> 21.| 管道</p>
+<p> 22.crontab -e 查看定时</p>
+<p> 23.current year to second infromx中的获取当前时间到秒</p>
+]]></content>
+      
+        <categories>
+            
+            <category> shell教程 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> shell </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[TensorFlow学习及java调用]]></title>
+      <url>/2018/03/31/TensorFlow%E5%AD%A6%E4%B9%A0%E5%8F%8Ajava%E8%B0%83%E7%94%A8/</url>
+      <content type="html"><![CDATA[<h1 id="TensorFlow学习及java调用"><a href="#TensorFlow学习及java调用" class="headerlink" title="TensorFlow学习及java调用"></a>TensorFlow学习及java调用</h1><hr>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>TensorFlow是谷歌基于DistBelief进行研发的第二代人工智能学习系统，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。<br>TensorFlow可被用于语音识别或图像识别等多项机器学习和深度学习领域，对2011年开发的深度学习基础架构DistBelief进行了各方面的改进，它可在小到一部智能手机、大到数千台数据中心服务器的各种设备上运行。TensorFlow将完全开源，任何人都可以用</p>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h2><p>这里介绍windows安装步骤,在windows中python必须使用3.5及以上的版本,首先安装python3.5及上版本(略),然后</p>
+<blockquote>
+<p>pip install tensorflow</p>
+</blockquote>
+<p>在python中使用:</p>
+<blockquote>
+<p>import tensorflow as tf</p>
+</blockquote>
+<h2 id="3-基础"><a href="#3-基础" class="headerlink" title="3.基础"></a>3.基础</h2><p>###3.1Tensor张量<br>Tensor是一个很重要的概念,在TensorFlow中所有的数据都用张量表示,从功能上看,张量可以被简单理解为多维数组.张量主要保存了三个属性:名字,维度和类型</p>
+<pre><code>import tensorflow as tf
+a = tf.constant([1.0, 2.0], name=&quot;a&quot;)
+b = tf.constant([2.0, 3.0], name=&quot;b&quot;)
+result = a + b
+print(result)
+</code></pre><p>###3.2会话的使用<br>会话(session)拥有管理TensorFlow程序运行时的所有资源,用来执行定义好的运算.</p>
+<pre><code>with tf.Session() as sess:
+    print(sess.run(result))
+</code></pre><p>###3.3变量Variable<br>当训练模型的时候，要用变量来存储和更新参数，变量包含张量（Tensor）存放于内存的缓存区，建模时它们需要被明确地初始化，模型训练后它们b必须被存储到磁盘。这些变量的值可在之后模型训练和分析时被加载。</p>
+<pre><code>w1= tf.Variable(tf.random_normal([2, 3], stddev=1, seed=1))
+w2= tf.Variable(tf.random_normal([3, 1], stddev=1, seed=1))
+x = tf.constant([[0.7, 0.9]]) 
+a = tf.matmul(x, w1)
+y = tf.matmul(a, w2)
+sess = tf.Session()
+sess.run(w1.initializer)  
+sess.run(w2.initializer)  
+print(sess.run(y))  
+sess.close()
+</code></pre><p>###3.3占位符placeholder<br>一个抽象的概念,是一种约束,规范输入或者输出等的数据的格式.</p>
+<pre><code>//规定x的类型,维度,和名称
+x = tf.placeholder(tf.float32, shape=(1, 2), name=&quot;input&quot;)
+a = tf.matmul(x, w1)
+y = tf.matmul(a, w2)
+
+sess = tf.Session()
+
+init_op = tf.global_variables_initializer()  
+sess.run(init_op)
+
+print(sess.run(y, feed_dict={x: [[0.7,0.9]]}))
+</code></pre><h2 id="4-深层神经网络"><a href="#4-深层神经网络" class="headerlink" title="4.深层神经网络"></a>4.深层神经网络</h2><p>维基百科对深度学习的精确定位：“一类通过多层非线性变换对高复杂性数据建模算法的合集”。可以看出深度学习有俩个重要的概念  <strong>多层 非线性</strong></p>
+<p>###4.1深层神经网络结构<br>分为输入层,隐藏层和输出层</p>
+<p>###4.2激活函数:实现去线性化<br>线性化只能解决线性可分问题,使用激活函数进行非线性化处理更加复杂的问题(无法通过直线或者更高维的平面解决)<br>TensorFlow提供7种不同的非线性激活函数,常用tf.nn.relu、tf.sigmoid和tf.tanh,<strong>每一层的输出都需要使用激活函数</strong></p>
+<pre><code>a = tf.nn.relu(tf.matmul(x,w1) + biases1)
+y = tf.nn.relu(tf.matmul(a,w2) + biases2)
+</code></pre><p>###4.3损失函数<br>神经网络模型的效果及优化的目标是通过损失函数来定义的,也及是说预测结果和实际结果对比,当损失函数值越小时,越接近真实值.</p>
+<p>预测输出值需要进行转换为概率通过softmax回归,再由损失函数计算值<br>常用</p>
+<pre><code>//y是预测值,y_是真实值,交叉熵和softmax回归
+cross_entropy = tf.nn.sofmax_cross_entropy_with_logit(y,y_)
+
+//均方误差损失函数
+mse = tf.reduce_mean(tf.square(y_ - y))
+
+//自定义损失函数
+//定义损失函数使得预测少了的损失大，于是模型应该偏向多的方向预测。
+loss_less = 10
+loss_more = 1
+loss = tf.reduce_sum(tf.where(tf.greater(y, y_), (y - y_) * loss_more, (y_ - y) * loss_less))
+</code></pre><p>###4.4神经网络优化算法<br><strong>通过梯度下降算法</strong> 和 <strong>反向传播</strong> 调整神经网络中参数的取值,梯度下降算法主要优化单个参数的取值,反向传播给出一个高效的方式在所有参数上使用梯度算法, <strong>反向传播是训练神经网络的核心算法</strong> </p>
+<pre><code>//神经网络优化算法,参数是学习率和损失函数
+train_op = tf.train.GradientDescentOptimizer(LEARNING_RATE).minimize(loss)
+</code></pre><p>###4.5指数学习率:控制参数更新的速度<br> 使用指数衰减的学习率，在迭代初期得到较高的下降速度，可以在较小的训练轮数下取得不错的收敛程度</p>
+<pre><code>TRAINING_STEPS = 100
+global_step = tf.Variable(0)
+LEARNING_RATE = tf.train.exponential_decay(0.1, global_step, 1, 0.96, staircase=True)
+
+x = tf.Variable(tf.constant(5, dtype=tf.float32), name=&quot;x&quot;)
+y = tf.square(x)
+train_op = tf.train.GradientDescentOptimizer(LEARNING_RATE).minimize(y, global_step=global_step)
+</code></pre><p>###4.6正则化:解决过拟合</p>
+<pre><code>//损失函数的计算和正则化
+regularizer = tf.contrib.layers.l2_regularizer(REGULARAZTION_RATE)
+regularaztion = regularizer(weights1) + regularizer(weights2)
+loss = cross_entropy_mean + regularaztion
+</code></pre><p>###4.7滑动平均模型<br>使模型在测试数据上更健壮的方法,在采用随机梯度算法训练神经网络时,使用滑动平均模型在很多应用中都可以一定程度提高最终模型在测试数据上的表现</p>
+<pre><code>//定义滑动平均模型
+import tensorflow as tf
+v1 = tf.Variable(0, dtype=tf.float32)
+step = tf.Variable(0, trainable=False)
+ema = tf.train.ExponentialMovingAverage(0.99, step)
+maintain_averages_op = ema.apply([v1])
+</code></pre><h2 id="5-全模型"><a href="#5-全模型" class="headerlink" title="5.全模型"></a>5.全模型</h2><pre><code># coding: utf-8
+
+# In[1]:
+
+
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+
+
+# #### 1.设置输入和输出节点的个数,配置神经网络的参数。
+
+# In[2]:
+
+
+INPUT_NODE = 784 # 输入节点
+OUTPUT_NODE = 10 # 输出节点
+LAYER1_NODE = 500# 隐藏层数节点数量   
+
+BATCH_SIZE = 100 # 每次batch打包的样本个数
+
+# 模型相关的参数
+LEARNING_RATE_BASE = 0.8  
+LEARNING_RATE_DECAY = 0.99
+REGULARAZTION_RATE = 0.0001   
+TRAINING_STEPS = 5000   
+MOVING_AVERAGE_DECAY = 0.99  
+
+
+# #### 2. 定义辅助函数来计算前向传播结果，使用ReLU做为激活函数。
+
+# In[3]:
+
+
+def inference(input_tensor, avg_class, weights1,     biases1, weights2, biases2,weights3,biases3):
+    # 不使用滑动平均类
+    if avg_class == None:
+        layer1 = tf.nn.relu(tf.matmul(input_tensor, weights1) + biases1)
+        layer2 = tf.nn.relu(tf.matmul(layer1, weights3) + biases3)
+           return tf.matmul(layer2, weights2) + biases2
+
+    else:
+        # 使用滑动平均类
+        layer1 = tf.nn.relu(tf.matmul(input_tensor, avg_class.average(weights1)) + avg_class.average(biases1))
+        layer2 = tf.nn.relu(tf.matmul(layer1, avg_class.average(weights3)) + avg_class.average(biases3))
+        return tf.matmul(layer2, avg_class.average(weights2)) + avg_class.average(biases2)  
+
+
+# #### 3. 定义训练过程。
+
+# In[4]:
+
+
+def train(mnist):
+    x = tf.placeholder(tf.float32, [None, INPUT_NODE], name=&apos;xinput&apos;)
+
+    y_ = tf.placeholder(tf.float32, [None, OUTPUT_NODE], name=&apos;yinput&apos;)
+    # 生成隐藏层的参数。
+    weights1 = tf.Variable(tf.truncated_normal([INPUT_NODE, LAYER1_NODE], stddev=0.1))
+    biases1 = tf.Variable(tf.constant(0.1, shape=[LAYER1_NODE]))
+    # 生成隐藏层的参数。
+    weights3 = tf.Variable(tf.truncated_normal([LAYER1_NODE, 200], stddev=0.1))
+    biases3 = tf.Variable(tf.constant(0.1, shape=[200]))
+    # 生成输出层的参数。
+    weights2 = tf.Variable(tf.truncated_normal([LAYER1_NODE, OUTPUT_NODE], stddev=0.1))
+    biases2 = tf.Variable(tf.constant(0.1, shape=[OUTPUT_NODE]))
+
+    # 计算不含滑动平均类的前向传播结果
+    #y = inference(x, None, weights1, biases1, weights2, biases2,weights3,biases3)
+    layer1 = tf.nn.relu(tf.matmul(x, weights1) + biases1)
+    #layer2 = tf.nn.relu(tf.matmul(layer1, weights3) + biases3)
+    y = tf.add(tf.matmul(layer1, weights2), biases2, name=&apos;y_conv_add&apos;)
+
+
+    # 定义训练轮数及相关的滑动平均类 
+    global_step = tf.Variable(0, trainable=False)
+    variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
+    variables_averages_op = variable_averages.apply(tf.trainable_variables())
+    layer3 = tf.nn.relu(tf.matmul(x, variable_averages.average(weights1)) + variable_averages.average(biases1))
+    average_y = tf.add(tf.matmul(layer3, weights2), biases2, name=&apos;averagey_conv_add&apos;)
+       # average_y = inference(x, variable_averages, weights1, biases1, weights2, biases2,weights3,biases3)
+
+    # 计算交叉熵及其平均值
+    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
+    cross_entropy_mean = tf.reduce_mean(cross_entropy)
+
+    # 损失函数的计算和正则化
+    regularizer = tf.contrib.layers.l2_regularizer(REGULARAZTION_RATE)
+    regularaztion = regularizer(weights1) + regularizer(weights2)
+    loss = cross_entropy_mean + regularaztion
+
+    # 设置指数衰减的学习率。
+    learning_rate = tf.train.exponential_decay(
+    LEARNING_RATE_BASE,
+    global_step,
+    mnist.train.num_examples / BATCH_SIZE,
+    LEARNING_RATE_DECAY,
+    staircase=True)
+
+    # 优化损失函数
+    train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)
+
+    # 反向传播更新参数和更新每一个参数的滑动平均值
+    &quot;&quot;&quot;定义一个控制依赖，并返回一个上下文管理器
+    with g.control_dependencies([a, b, c]):
+    # `d` 和 `e` 将在 `a`, `b`, 和`c`执行完之后运行.
+    d = …
+    e = …
+    &quot;&quot;&quot;
+    with tf.control_dependencies([train_step, variables_averages_op]):
+    train_op = tf.no_op(name=&apos;train&apos;)#tf.no_op；什么也不做
+
+    # 计算正确率
+    correct_prediction = tf.equal(tf.argmax(average_y, 1), tf.argmax(y_, 1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+
+    # 初始化会话，并开始训练过程。
+    with tf.Session() as sess:
+        tf.global_variables_initializer().run()
+        validate_feed = {x: mnist.validation.images, y_: mnist.validation.labels}
+        test_feed = {x: mnist.test.images[1:2], y_: mnist.test.labels[1:2]} 
+
+        # 循环的训练神经网络。
+        for i in range(TRAINING_STEPS):
+            if i % 1000 == 0:
+                validate_acc = sess.run(accuracy, feed_dict=validate_feed)
+                print(&quot;After %d training step(s), validation accuracy using average model is %g &quot; % (i, validate_acc))
+
+            xs,ys=mnist.train.next_batch(BATCH_SIZE)
+            sess.run(train_op,feed_dict={x:xs,y_:ys})
+
+        test_acc=sess.run(average_y,feed_dict=test_feed)
+        print(test_feed)
+        print(test_acc)
+        # 保存二进制模型  
+        output_graph_def = tf.graph_util.convert_variables_to_constants(sess, sess.graph_def, output_node_names=[&apos;y_conv_add&apos;])  
+        with tf.gfile.FastGFile(&apos;datasets/logs/mnist.pb&apos;, mode=&apos;wb&apos;) as f:  
+            f.write(output_graph_def.SerializeToString())
+
+
+# #### 4. 主程序入口，这里设定模型训练次数为5000次。
+
+# In[5]:
+
+
+def main(argv=None):
+    mnist = input_data.read_data_sets(&quot;datasets/MNIST_data&quot;, one_hot=True)
+    train(mnist)
+
+if __name__==&apos;__main__&apos;:
+    main()
+</code></pre><h2 id="6-java调用模型"><a href="#6-java调用模型" class="headerlink" title="6.java调用模型"></a>6.java调用模型</h2><pre><code>package shuzishibie;
+
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.awt.print.Printable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import org.tensorflow.Operation;
+import org.tensorflow.Output;
+import org.tensorflow.Shape;
+
+import com.test.tensorflow.ChineseRecognition2;
+import com.test.tensorflow.TensorFlowInferenceInterface;
+
+
+public class ImgShibie {
+    public static void getData(String path){
+        //只是测试数据,不要在意
+        double[] shuzi = { 0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.45490199,
+         0.49019611,  0.67058825,  1.,  1.,  0.58823532,
+         0.36470589,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0.66274512,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.85490203,  0.11764707,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0.66274512,  0.99215692,
+         0.99215692,  0.99215692,  0.83529419,  0.55686277,  0.6901961 ,
+         0.99215692,  0.99215692,  0.4784314 ,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.20392159,  0.98039222,  0.99215692,  0.82352948,  0.1254902 ,
+         0.04705883,  0,  0.02352941,  0.80784321,  0.99215692,
+         0.54901963,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0.3019608 ,  0.98431379,
+         0.82352948,  0.09803922,  0,  0,  0,
+         0.4784314 ,  0.97254908,  0.99215692,  0.25490198,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.12156864,  0.07058824,  0,
+         0,  0,  0,  0.81960791,  0.99215692,
+         0.99215692,  0.25490198,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.45882356,  0.96862751,  0.99215692,  0.77647066,  0.03921569,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.29803923,  0.96862751,  0.99215692,
+         0.90588242,  0.24705884,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.50196081,  0.99215692,  0.99215692,  0.56470591,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.6901961 ,  0.96470594,  0.99215692,
+         0.62352943,  0.04705883,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.09803922,
+         0.91764712,  0.99215692,  0.91372555,  0.13725491,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.77647066,  0.99215692,  0.99215692,
+         0.5529412 ,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.30588236,
+         0.97254908,  0.99215692,  0.74117649,  0.04705883,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0.07450981,  0.7843138 ,  0.99215692,  0.99215692,
+         0.5529412 ,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.52549022,
+         0.99215692,  0.99215692,  0.67843139,  0.04705883,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.97254908,  0.99215692,  0.99215692,
+         0.09803922,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.97254908,  0.99215692,  0.99215692,  0.16862746,  0.07843138,
+         0.07843138,  0.07843138,  0.07843138,  0.01960784,  0,
+         0.01960784,  0.07843138,  0.07843138,  0.14509805,  0.58823532,
+         0.58823532,  0.58823532,  0.57647061,  0.03921569,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0.97254908,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.65882355,  0.56078434,  0.65098041,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.48235297,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0.68235296,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.97647065,  0.96862751,
+         0.96862751,  0.66274512,  0.45882356,  0.45882356,  0.22352943,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.46274513,  0.48235297,  0.48235297,  0.48235297,  0.65098041,
+         0.99215692,  0.99215692,  0.99215692,  0.60784316,  0.48235297,
+         0.48235297,  0.16078432,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0};
+
+    //需要jdk1.8并且是64位
+    System.load(&quot;D:\\tensorflow_jni.dll&quot;);
+    //参数1.模型路径,2.可以自己命名,看了下源码没感觉用处
+    TensorFlowInferenceInterface tfi = new TensorFlowInferenceInterface(&quot;D:\\mnist.pb&quot;,&quot;imageType&quot;);
+    //模型输出名称y_conv_add
+    final Operation operation = tfi.graphOperation(&quot;y_conv_add&quot;);  
+    Output output = operation.output(0);  
+    Shape shape = output.shape();  
+    final int numClasses = (int) shape.size(1); 
+    ChineseRecognition2 ch = new ChineseRecognition2();
+//    float[] floatValues = ch.getImagePixel(&quot;D:\\one.jpg&quot;); //将图片处理为输入对应张量格式,如果模型数据量足够大,可以自己画图片测试  
+    float[] float1 = new float[shuzi.length];
+    for (int i = 0; i &lt; shuzi.length; i++) {
+                    float1[i] = (float) shuzi[i];
+                }
+
+    tfi.feed(&quot;xinput&quot;, float1, 1, 784); //将数据复制给输入张量x_input即为模型定义时的x名称  
+    tfi.run(new String[] { &quot;y_conv_add&quot; }, false);//输出张量  
+    float[] outPuts = new float[numClasses];//结果分类  
+    tfi.fetch(&quot;y_conv_add&quot;, outPuts);//接收结果 outPuts保存的即为预测结果对应的概率，最大的一个通常为本次预测结果  
+    float f = outPuts[0];
+    int num = 0;
+    for (int i = 0; i &lt; outPuts.length; i++) {
+        if (f &lt; outPuts[i]) {
+                        f = outPuts[i];
+                        num = i;
+                    }
+
+                }
+    System.out.println(f);
+    //预测数字是多少
+    System.out.println(num);
+
+    }
+    public static void main(String[] args) {
+        ImgShibie.getData(&quot;&quot;);
+    }
+
+}
+</code></pre><p>详细代码在git中地址:<a href="https://github.com/gaoxin1314/TensorFlow_java.git" target="_blank" rel="external">https://github.com/gaoxin1314/TensorFlow_java.git</a></p>
+]]></content>
+      
+        <categories>
+            
+            <category> 机器学习 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> TensorFlow 机器学习 深度学习 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[java内存区域(内存结构划分)]]></title>
+      <url>/2018/03/31/java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/</url>
+      <content type="html"><![CDATA[<h2 id="java内存区域-内存结构划分"><a href="#java内存区域-内存结构划分" class="headerlink" title="java内存区域(内存结构划分)"></a>java内存区域(内存结构划分)</h2><p>java内存主要分为6部分</p>
+<ol>
+<li><strong>程序计数器</strong></li>
+<li><strong>虚拟机栈</strong></li>
+<li><strong>本地方法栈</strong></li>
+<li><strong>堆</strong></li>
+<li><strong>方法区</strong></li>
+<li><strong>直接内存</strong></li>
+</ol>
+<p>###1.程序计数器###<br>是一块较小的内存空间,它的作用可以看做是当前当前线程所执行的字节码的行号指示器.在虚拟机的概念模型里(仅是感概念模型,各种虚拟机可能会通过一些更高效的方式去实现),字节码解释器工作时就说通过改变这个计数器的值选取下一条需要执行的字节码指令,分支、循环、跳转、异常处理、线程恢复等基础功能都需要依赖这个计数器来完成。</p>
+<p><strong>多线程时，当线程数超过CPU数量或CPU内核数量，线程之间就要根据时间片轮询抢夺CPU时间资源。因此每个线程有要有一个独立的程序计数器，记录下一条要运行的指令。线程私有的内存区域。</strong></p>
+<p>如果线程正在执行的是一个java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果正在执行的是Natvie方法，这个计数器值则为空。此内存区域唯一一个在java虚拟机规范中没有规定任何OutOfMemoryErroe情况的区域。</p>
+<p>###2.虚拟机栈<br>与程序计数器一样，java虚拟机栈也是线程私有的，它的生命周期与线程相同。虚拟机栈描述的是java方法执行的内存模型：每个方法被执行的时候都会同时创建一个栈帧用于存储局部变量表、操作栈、动态链接、方法出口的呢过信息。每一方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机中从入栈道出栈的的过程。</p>
+<p>经常有人把java内存区分为堆内存和栈内存，这种分发比较粗糙，java内存区域的划分实际上远比这复杂。这种划分方式的流行只能说明大多数程序最关注的、与对象内存分配关系最密切的内存区域是这俩块。其中“堆”在后面讲述，“栈”就是现在讲的虚拟机栈，或者说是虚拟机栈中的局部变量表部分。</p>
+<p>局部变量表存放了编译期可知的各种基本数据类型、对象引用和returnAddress类型（指向了一条字节码指令的地址）。</p>
+<p>其中64的long和double类型的数据会占用2个局部变量空间，其余的数据类型只占用1个。局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表的大小。</p>
+<p>在java虚拟机规范中，对这个区域规定了俩种异常状况：如果线程请求的栈深度大于虚拟机所允许的深度，将跑出StackOverFlowErroe异常：如果虚拟机栈可以动态扩展，当扩展无法申请到足够的内存时会抛出OutOfMemoryErroe异常。</p>
+<p>###3.本地方法栈###<br>本地方法栈与虚拟机栈所发挥的作用是非常相似的，其区别不过是虚拟机栈为虚拟机执行java方法服务，而本地方法栈则是为虚拟机使用的到的Native方法服务。虚拟机规范中本地方法栈中的方法使用的语言、使用方式与数据结构并没有强制规定，因此具体的虚拟机可以自由实现它。甚至有的虚拟机直接就把本地方法栈和虚拟机栈合二为一。与虚拟机栈一样，本地方法栈区域也会跑出StackOverflowError和OutOfMemoryError异常</p>
+<p>###4.java堆<br>对于大多数应用来说,java堆是java虚拟机所管理的内存中最大的一块。java堆是被所有线程共享的一块内存区域，在虚拟机启动时创建。此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例都在这里分配内存。这一点在java虚拟机规范中的描述：所有的对象实例以及数组都要再堆上分配，但是随着JIT编译器的发展与逃逸分析技术的逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化，所有的对象都是分配在堆上也渐渐变得不是那么“绝对”了。</p>
+<p>java堆是垃圾收集器管理的主要区域,因此很多时候也被称做”GC堆”,如果从内存回收的角度看,由于现在收集器基本都是采用的分代收集算法,所以java堆中还可以细分为:新生代和老年代;在细致一点的有Eden空间、From Survivor空间、To Survivor空间等。如果从内存分配的角度看，线程共享的java堆中可能划分出多个线程私有的分配缓冲区。不过，无论如何划分，都与存放内容无关，无论哪个区域，存储的都是仍然是对象实例，进一步划分的目的是为了更好地回收内存，或者更快的分配内存。</p>
+<p>根据java虚拟机规范的规定，java堆可以出于物理上不连续的内存空间中，只要逻辑上是连续的即可，就想我们的磁盘空间一样。在实现时，既可以实现成固定大小的，也可以是可以扩展的，不过当前主流的虚拟机都是按照可扩展来实现的。如果在堆中没内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryErroe异常。</p>
+<p>###5.方法区</p>
+<p>方法区与java堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。虽然java虚拟机把方法区描述为堆的一个逻辑部分，但是他却又个别名叫做NonHeap，目的应该是与java堆区分开来。</p>
+<p>对于习惯在hotSpot虚拟机上开发和部署程序的开发者来说，很多人愿意把方法区成为“永久代”，本质上两者并不等价，仅仅是因为HotSpot虚拟机的设计团队选择吧GC分代收集扩展至方法区，或者说使用永久代来实现方法区而已。对于其他虚拟机来说是不存在永久代的感念的。及时是HotSpot虚拟机本身，根据官方发布的路线图信息，现在也有方法永久代并“搬家”值Native Memory来实现方法区的规划了.</p>
+<p><strong>运行时常量池是方法区的一部分</strong></p>
+<p>###6.直接内存<br>直接内存并不是虚拟机运行时数据区的一部分。<br>在NIO中，引入了一种基于通道和缓冲区的I/O方式，它可以使用native函数直接分配堆外内存，然后通过一个存储在java堆中的DirectByteBuffer对象作为这块内存的引用进行操作</p>
+<p>##根搜索算法<br>引用计算法很难解决对象直接相互循环引用的问题,所以java和c#采用根搜索算法,这个算法的基本思路是通过一系列的命名为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索的走过的路径成为引用链，当一个对象到GC Roots没有任务引用链相连时，则证明此对象是不可用的。</p>
+<p><strong>在java中，可作为GC Roots的对象包括</strong>：</p>
+<ol>
+<li><strong>虚拟机栈中的引用的对象。</strong></li>
+<li><strong>方法区中的类静态属性引用的对象。</strong></li>
+<li><strong>方法区中的常量引用的对象</strong>。</li>
+<li><strong>本地方法栈中JNI（native方法）的引用对象。</strong></li>
+</ol>
+]]></content>
+      
+        <categories>
+            
+            <category> java </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[实现好看的表格]]></title>
+      <url>/2018/03/31/%E5%85%BC%E5%AE%B9ie%E5%90%84%E4%B8%AA%E7%89%88%E6%9C%AC%E5%A5%BD%E7%9C%8B%E7%9A%84%E8%A1%A8%E6%A0%BC/</url>
+      <content type="html"><![CDATA[<h1 id="实现好看的表格"><a href="#实现好看的表格" class="headerlink" title="实现好看的表格"></a>实现好看的表格</h1><hr>
+<p><img src="https://i.imgur.com/KhjeEyG.gif" alt=""></p>
+<h1 id="1-首先需要一个div-和table-并且把表头做好-在thead标签下"><a href="#1-首先需要一个div-和table-并且把表头做好-在thead标签下" class="headerlink" title="1.首先需要一个div 和table,并且把表头做好,在thead标签下"></a>1.首先需要一个div 和table,并且把表头做好,在thead标签下</h1><p> 简要表头</p>
+<pre><code>&lt;div class=&quot;sort&quot; id=&quot;taskquery1&quot; style=&quot;display: none; position: absolute;height: 350px;&quot;&gt;
+            &lt;table id=&quot;simpleLineTable&quot; class=&quot;fix_table&quot; style=&quot;width: 1300px; border-top-color: black;&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;border-right-color: black;&quot;&gt;序号&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;&quot;&gt;机构&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprem&apos;,2,1)&quot;&gt;互动渠道保费&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdpremcompletionrate&apos;,3,1)&quot;&gt;完成率&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprempercentage&apos;,4,1)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;comparison&apos;,5,1)&quot;&gt;与平均增速相比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;rate&apos;,6,1)&quot;&gt;占公司业务比重&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprem&apos;,7,1)&quot;&gt;引导业务保费&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprempercentage&apos;,8,1)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprem&apos;,9,1)&quot;&gt;合计保费&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:130px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprempercentage&apos;,10,1)&quot;&gt;同比&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+</code></pre><p>全景表头</p>
+<pre><code>&lt;div class=&quot;sort&quot; id=&quot;taskquery&quot; style=&quot;display: none; position: absolute;height: 350px;&quot;&gt;
+            &lt;!--         style=&quot;display: none;&lt;div class=&quot;autoScroll&quot; style=&quot;width: 100%;&quot; &gt; --&gt;
+            &lt;!-- &lt;div style=&quot;text-align: right;&quot; class=&quot;autoScroll&quot;&gt; 单位：万元 &lt;/div&gt; --&gt;
+            &lt;table id=&quot;lineTable&quot; class=&quot;fix_table&quot; style=&quot;width: 1600px; border-top-color: black;&quot;&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1;border-right-color: black; &quot;&gt;&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1; &quot;&gt;&lt;/td&gt;
+                        &lt;td colspan=&quot;6&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;height: 25px;background-color: #dce6f1;&quot;&gt;互动渠道&lt;/td&gt;
+                        &lt;td colspan=&quot;14&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;height: 25px;background-color: #dce6f1&quot;&gt;引导业务&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        &gt;&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        &gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+
+                    &lt;tr&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1;border-right-color: black; &quot;&gt;序号&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px; background-color: #dce6f1; &quot;&gt;机构&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdrsprem&apos;,102)&quot;&gt;寿险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdrsprempercentage&apos;,103)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdjkprem&apos;,104)&quot;&gt;健康险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdjkpercentage&apos;,105)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprem&apos;,106)&quot;&gt;合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;hdprempercentage&apos;,107)&quot;&gt;同比&lt;/td&gt;
+
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxrsprem&apos;,108)&quot;&gt;引导电销寿险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxrspercentage&apos;,109)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxjkprem&apos;,110)&quot;&gt;引导电销健康&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxjkpercentage&apos;,111)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxprem&apos;,112)&quot;&gt;引导电销合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;dxpercentage&apos;,113)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxrsprem&apos;,114)&quot;&gt;引导网销寿险&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxrspercentage&apos;,115)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxjkprem&apos;,116)&quot;&gt;引导网销健康&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxjkpercentage&apos;,117)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxprem&apos;,118)&quot;&gt;引导网销合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;wxpercentage&apos;,119)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #b8cce4;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprem&apos;,120)&quot;&gt;引导业务合计&lt;/td&gt;
+                        &lt;td colspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #C2E0F8;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;ydprempercentage&apos;,121)&quot;&gt;同比&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprem&apos;,122)&quot;&gt;总计&lt;/td&gt;
+                        &lt;td rowspan=&quot;1&quot; align=&quot;center&quot; style=&quot;border: 1px solid #000;width:80px;height: 25px;background-color: #dce6f1;cursor: pointer;&quot;
+                        onclick=&quot;tableListSort(this,&apos;sumprempercentage&apos;,123)&quot;&gt;同比&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+</code></pre><h2 id="2异步查询数据-将数据放入一个list集合中返回并调用gridTrLine-result-array-result是数据-array是列字段也就是对象的属性"><a href="#2异步查询数据-将数据放入一个list集合中返回并调用gridTrLine-result-array-result是数据-array是列字段也就是对象的属性" class="headerlink" title="2异步查询数据,将数据放入一个list集合中返回并调用gridTrLine(result, array),result是数据,array是列字段也就是对象的属性"></a>2异步查询数据,将数据放入一个list集合中返回并调用gridTrLine(result, array),result是数据,array是列字段也就是对象的属性</h2><pre><code>/**
+ *  lineTable table的id必须需要
+    公共方法,为表格添加栅格
+    result:需要添加的对象
+    array:对象的属性数组
+    conFirstArray:是固定竖列第一列显示数组
+    isHengShu:是否横竖,bool类型,true是横向是一个对象,false是纵向是一个对象
+ */
+function gridTrLine(result,array,conFirstArray,isHengShu){
+
+    var len = array.length;
+    var isThreeNotEmpty = null;
+    var isFourNotEmpty = false;
+    //添加表格行
+    var size = result.data.length;
+
+    var indexy = 0;
+    var indexz = 0;
+    //判断是否有第3个参数,是否需要固定列,如果有则把isThreeNotEmpty等于了第3个参数
+     if(arguments.length &gt;= 3){
+         if(conFirstArray != null){
+             isThreeNotEmpty = conFirstArray;
+             size = conFirstArray.length;
+         }
+    } 
+    //判断是否有第4个参数,是否是竖的放数,如果有则把isFourNotEmpty等于了第4个参数
+    if(arguments.length == 4){
+        if(isHengShu == true){
+            isFourNotEmpty = true;
+            len = result.data.length;
+        }
+    }
+
+    for(var i=0;i&lt;size;i++){
+
+
+        var str = &apos;&lt;tr name=&quot;gridTr&quot; id=&quot;row[&apos;+i+&apos;]&quot; &apos;+(i%2==0?&apos;style=&quot;background-color:#FFFFFF&quot;&apos;:&apos;style=&quot;background-color:#E9E9E9&quot;&apos;)+&apos;&gt;&apos;;
+        for(var con = 0 ; con&lt;len ; con++){
+                    indexy = i;
+                    indexz = con;
+                    //如果isHengShu是true,则竖的放数据,将i和con互换位置
+                    if(isFourNotEmpty){
+                        indexy = con;
+                        indexz = i;
+                    }
+
+                    if(con == 0){
+                        /* 添加第一列和第二列的数值 */
+
+                        str += (&apos;&lt;td align=&quot;center&quot; style=&quot;height: 24px;border: 1px  solid #ccc;&apos;+
+                        &apos;font-weight: 900 ;&quot; nowrap=&quot;nowrap&quot;&gt;&apos;+
+                            (isThreeNotEmpty==null?(i):isThreeNotEmpty[i]) +
+                        &apos;&lt;/td&gt;&apos;+
+
+                         &apos;&lt;td align=&quot;center&quot; style=&quot;height: 24px;border: 1px solid #ccc;text-align: center;&apos;+
+                        &apos;&apos;+
+                        (isThreeNotEmpty!=null?&apos;&apos;:&apos;font-weight: 900 ;&apos;)+
+                            &apos;&quot; nowrap=&quot;nowrap&quot; id=&quot;cr[&apos;+indexy+&apos;][&apos;+indexz+&apos;]&quot;&gt;&apos;+
+                            (result.data[indexy][(array[indexz])]==null?&quot;&quot;:result.data[indexy][(array[indexz])])+
+                        &apos;&lt;/td&gt;&apos;)
+                        }
+
+                    else{
+                        /* 添加剩下的数值 */
+                        str+=(&apos;&lt;td align=&quot;center&quot; style=&quot;height: 24px;border: 1px solid #ccc;&apos;+
+                        &apos;&quot; nowrap=&quot;nowrap&quot;&gt;&apos;+
+                            &apos;&lt;span id=&quot;cr[&apos;+indexy+&apos; ][&apos;+indexz+&apos;]&quot;&gt;&apos;+
+                            (result.data[indexy][(array[indexz])]==null?&quot;&quot;:result.data[indexy][(array[indexz])])+&apos;&lt;/span&gt;&apos;+
+                        &apos;&lt;/td&gt;&apos;)
+                        }
+
+
+
+
+        }
+        str+=&apos;&lt;/tr&gt;&apos;;
+        $(&quot;#lineTable&quot;).append(str);
+    }
+}
+//删除grid方法
+function delGridTrLine(){
+    if($(&quot;tr[name=gridTr]&quot;) != null){
+        $(&quot;tr[name=gridTr]&quot;).remove();
+    }
+}
+</code></pre><h2 id="3固定表头和列FixTable-“lineTable”-2-width-340"><a href="#3固定表头和列FixTable-“lineTable”-2-width-340" class="headerlink" title="3固定表头和列FixTable(“lineTable”, 2, width, 340);"></a>3固定表头和列FixTable(“lineTable”, 2, width, 340);</h2><pre><code>/**
+ * 固定行和列
+ */
+    function FixTable(TableID, FixColumnNumber, width, height) {
+    /// &lt;summary&gt;
+    /// 锁定表头和列
+    /// &lt;para&gt; sorex.cnblogs.com &lt;/para&gt;
+    /// &lt;/summary&gt;
+    /// &lt;param name=&quot;TableID&quot; type=&quot;String&quot;&gt;
+    /// 要锁定的Table的ID
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;FixColumnNumber&quot; type=&quot;Number&quot;&gt;
+    /// 要锁定列的个数
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;width&quot; type=&quot;Number&quot;&gt;
+    /// 显示的宽度
+    /// &lt;/param&gt;
+    /// &lt;param name=&quot;height&quot; type=&quot;Number&quot;&gt;
+    /// 显示的高度
+    /// &lt;/param&gt;
+    if ($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).length != 0) {
+    $(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).before($(&quot;#&quot; + TableID));
+    $(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).empty();
+    }
+    else {
+    $(&quot;#&quot; + TableID).after(&quot;&lt;div id=&apos;&quot; + TableID + &quot;_tableLayout&apos; style=&apos;overflow:hidden;height:&quot; + height + &quot;px; width:&quot; + width + &quot;px;&apos;&gt;&lt;/div&gt;&quot;);
+    }
+    $(&apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableFix&quot;&gt;&lt;/div&gt;&apos;
+    + &apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableHead&quot;&gt;&lt;/div&gt;&apos;
+    + &apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableColumn&quot;&gt;&lt;/div&gt;&apos;
+    + &apos;&lt;div id=&quot;&apos; + TableID + &apos;_tableData&quot;&gt;&lt;/div&gt;&apos;).appendTo(&quot;#&quot; + TableID + &quot;_tableLayout&quot;);
+    var oldtable = $(&quot;#&quot; + TableID);
+    var tableFixClone = oldtable.clone(true);
+    tableFixClone.attr(&quot;id&quot;, TableID + &quot;_tableFixClone&quot;);
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).append(tableFixClone);
+    var tableHeadClone = oldtable.clone(true);
+    tableHeadClone.attr(&quot;id&quot;, TableID + &quot;_tableHeadClone&quot;);
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).append(tableHeadClone);
+    var tableColumnClone = oldtable.clone(true);
+    tableColumnClone.attr(&quot;id&quot;, TableID + &quot;_tableColumnClone&quot;);
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).append(tableColumnClone);
+
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).append(oldtable);
+
+    //设置外边框为0
+    $(&quot;#&quot; + TableID + &quot;_tableLayout table&quot;).each(function () {
+    $(this).css(&quot;margin&quot;, &quot;0&quot;);
+    });
+
+    //设置固定行div的高度,和fix div的高
+    var HeadHeight = $(&quot;#&quot; + TableID + &quot;_tableHead thead&quot;).height();
+    HeadHeight += 2;
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).css(&quot;height&quot;, HeadHeight);
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).css(&quot;height&quot;, HeadHeight);
+
+
+    var ColumnsWidth = 0;
+    var ColumnsNumber = 0;
+
+    //获取宽度
+    $(&quot;#&quot; + TableID + &quot;_tableColumn tr:last td:lt(&quot; + FixColumnNumber + &quot;)&quot;).each(function () {
+    ColumnsWidth += $(this).outerWidth(true);
+    ColumnsNumber++;
+    });
+    ColumnsWidth += 2;
+    if ($.browser.msie) {
+    switch ($.browser.version) {
+    case &quot;7.0&quot;:
+    if (ColumnsNumber &gt;= 3) ColumnsWidth--;
+    break;
+    case &quot;8.0&quot;:
+    if (ColumnsNumber &gt;= 2) ColumnsWidth--;
+    break;
+    }
+    }
+    //fix div和列div的宽度
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).css(&quot;width&quot;, ColumnsWidth);
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).css(&quot;width&quot;, ColumnsWidth);
+
+    //tableHead和tableColumn添加联动的滚动条事件
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).scroll(function () {
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).scrollLeft($(&quot;#&quot; + TableID + &quot;_tableData&quot;).scrollLeft());
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).scrollTop($(&quot;#&quot; + TableID + &quot;_tableData&quot;).scrollTop());
+    });
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).css({ &quot;overflow&quot;: &quot;hidden&quot;, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;50&quot;, &quot;background-color&quot;: &quot;Silver&quot; });
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).css({ &quot;overflow&quot;: &quot;hidden&quot;, &quot;width&quot;: width - 17, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;45&quot;, &quot;background-color&quot;: &quot;Silver&quot; });
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).css({ &quot;overflow&quot;: &quot;hidden&quot;, &quot;height&quot;: height - 17, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;40&quot;, &quot;background-color&quot;: &quot;#FFFFFF&quot; });
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).css({ &quot;overflow&quot;: &quot;scroll&quot;, &quot;width&quot;: width, &quot;height&quot;: height, &quot;position&quot;: &quot;relative&quot;, &quot;z-index&quot;: &quot;35&quot; });
+    if ($(&quot;#&quot; + TableID + &quot;_tableHead&quot;).width() &gt; $(&quot;#&quot; + TableID + &quot;_tableFix table&quot;).width()) {
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).css(&quot;width&quot;, $(&quot;#&quot; + TableID + &quot;_tableFix table&quot;).width());
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).css(&quot;width&quot;, $(&quot;#&quot; + TableID + &quot;_tableFix table&quot;).width() + 17);
+    }
+    if ($(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).height() &gt; $(&quot;#&quot; + TableID + &quot;_tableColumn table&quot;).height()) {
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).css(&quot;height&quot;, $(&quot;#&quot; + TableID + &quot;_tableColumn table&quot;).height());
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).css(&quot;height&quot;, $(&quot;#&quot; + TableID + &quot;_tableColumn table&quot;).height() + 17);
+    }
+    $(&quot;#&quot; + TableID + &quot;_tableFix&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    $(&quot;#&quot; + TableID + &quot;_tableHead&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    $(&quot;#&quot; + TableID + &quot;_tableColumn&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    $(&quot;#&quot; + TableID + &quot;_tableData&quot;).offset($(&quot;#&quot; + TableID + &quot;_tableLayout&quot;).offset());
+    }
+</code></pre><h2 id="4排序方法tableListSort-obj-arrField-arrnum-simpFalg"><a href="#4排序方法tableListSort-obj-arrField-arrnum-simpFalg" class="headerlink" title="4排序方法tableListSort(obj,arrField,arrnum,simpFalg);"></a>4排序方法tableListSort(obj,arrField,arrnum,simpFalg);</h2><pre><code>var tableData;//需要赋值查询出的数据
+var sorFlag = 0;
+var clickText = null;
+var clickNum = 0;
+var clickFlag = 0;
+var arrnumOld;
+var arrayField;//需要赋值查询出列
+
+    function tableListSort(obj,arrField,arrnum,simpFalg){
+        debugger;
+        var NameID;
+        var initNum = arrnum;
+        if(simpFalg){
+            NameID = &quot;simpleLineTable&quot;;
+            trNum = 0;
+            simpleDelGridTrLine();
+        }else{
+            NameID = &quot;lineTable&quot;;
+            trNum = 1;
+            delGridTrLine();
+            arrnum = arrnum -100;
+        }
+        var container = $(&quot;#&quot; + NameID + &quot;_tableData&quot;);
+        var scrollLeftSite = container.scrollLeft();
+        if(clickFlag == 0){
+            clickFlag = 1;
+            $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+            $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+            $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+            $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;);
+        /*     $(&quot;#&quot; + NameID + &quot; tr:eq(1)&quot;).css(&quot;cursor&quot;,&quot;wait&quot;); */
+            //点击别框重置
+            if(clickText != null){
+                if(arrnumOld != initNum){
+                    var initNumInside;
+                    if(arrnumOld &gt; 100){
+                        initNumInside = arrnumOld -100;
+                    }else{
+                        initNumInside = arrnumOld;
+                    }
+                    $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+initNumInside+&quot;)&quot;).html(clickText);
+                    clickNum = 0;
+                    sorFlag = 0;
+                }
+            }
+            arrnumOld = initNum;
+            //获取表头内容
+            if(clickNum == 0){
+                clickText =  obj.innerHTML;
+                clickNum = 1;
+            }
+            //合计不排序
+            var total = tableData.data.shift();
+            //排序方向控制
+            tableData.data.sort(function(a,b){
+                if(sorFlag == 0){
+                    var c = a;
+                    a = b;
+                    b = c;
+                }
+    return parseFloat((a[arrField]==null || a[arrField]==&quot;&quot;)?-999999:a[arrField])-parseFloat((b[arrField]==null || b[arrField]==&quot;&quot;)?-999999:b[arrField]);
+    });
+            tableData.data.unshift(total);
+
+            //改变表头内容
+            if(sorFlag == 0){
+                sorFlag = 1;
+                $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).html(clickText+&quot;↓&quot;);
+            }else{
+                sorFlag = 0;
+                $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).html(clickText+&quot;↑&quot;);
+            }
+            if(simpFalg){
+                simpleGridTrLine(tableData, arrayField);
+                var width = $(&quot;#taskquery1&quot;).width() - 20;
+                $(&quot;#simpleLineTable&quot;).width(width);
+                $(&quot;#simpleLineTable tr:eq(1) td&quot;).width(width / 10);
+                FixTable(&quot;simpleLineTable&quot;, 2, width, 340);
+                $(&quot;#simpleLineTable_tableData&quot;).css({
+                    &quot;overflow-x&quot; : &quot;hidden&quot;,
+                    &quot;overflow-y&quot; : &quot;auto&quot;
+                });
+
+            }else{
+                gridTrLine(tableData,arrayField);
+                //div的宽度
+                var width = $(&quot;#taskquery&quot;).width()-20;
+                //为table的设置宽度
+                $(&quot;#&quot; + NameID + &quot;&quot;).width(width*24/12) ;
+                //为table第一行的td设置宽度
+                $(&quot;#&quot; + NameID + &quot; tr:eq(&quot;+trNum+&quot;) td&quot;).width(width/12);
+                FixTable(NameID,2,width,340);
+                $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+                $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;) td:eq(&quot;+arrnum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+                $(&quot;#&quot; + NameID + &quot;_tableFix tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+                $(&quot;#&quot; + NameID + &quot;_tableHead tr:eq(&quot;+trNum+&quot;)&quot;).css(&quot;cursor&quot;,&quot;pointer&quot;);
+
+
+
+                var container = $(&quot;#&quot; + NameID + &quot;_tableData&quot;);
+                container.scrollLeft(scrollLeftSite);
+
+            }
+
+
+            /* container.animate({
+            scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+            }); */
+
+            clickFlag = 0;
+        }
+
+    }
+</code></pre>]]></content>
+      
+        <categories>
+            
+            <category> js </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> js 表格 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[shell脚本]]></title>
+      <url>/2017/11/18/shell%E8%84%9A%E6%9C%AC/</url>
+      <content type="html"><![CDATA[<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><hr>
+<p>#! /bin/sh   Bourne shell声明<br>          “shbang”是程序的第一行,通知内核使用哪种shell解释脚本中的行,shbang行由一个#!后跟shell的完整路径组成,,后面可跟上各种选项以控制shell的运行方式</p>
+<pre><code>注释:#加描述
+
+显示输出 echo
+
+局部变量和全局变量: variable_name = value,变全局变量,export variable_name
+作用域:局部变量在当前shell,全局变量又称环境变量在当前shell和由此shell派生的所有shell
+
+提取变量数值: $变量
+
+read 输入
+
+定义数组set 一系列词,每个词都可以通过位置访问,最多有9个位置,shift将左面的词移开
+
+命令替换:unix/linux命令的输出  赋给一个变量,这个命令需要用反引号,比如:linux中是命令行中输入date会输出时间,现在把这个命令赋给一个变量now = &apos;date&apos;,则now相当于date命令的输出
+
+算数运算:Bourne shell不支持算数运算,所以要用到unix/linux的命令进行计算,如n=&apos;expr 5 + 5&apos;
+linux命令的expr的用法
+</code></pre><p>1、计算字串长度</p>
+<blockquote>
+<p>expr length “this is a test”<br> 14</p>
+</blockquote>
+<p>2、抓取字串</p>
+<blockquote>
+<p>expr substr “this is a test” 3 5is is</p>
+</blockquote>
+<p>3、抓取第一个字符数字串出现的位置</p>
+<blockquote>
+<p>expr index “sarasara”  a<br> 2</p>
+</blockquote>
+<p>4、整数运算</p>
+<blockquote>
+<p>expr 14 % 9<br> 5<br>expr 10 + 10<br> 20<br>expr 1000 + 900<br> 1900<br>expr 30 / 3 / 2<br> 5<br>expr 30 /<em> 3 (使用乘号时，必须用反斜线屏蔽其特定含义。因为shell可能会误解显示星号的意义)<br> 90<br>expr 30 </em> 3<br> expr: Syntax error</p>
+</blockquote>
+<p>运算符:<br>          等式运算符: =   !=字符串   -eq  -ne 数字<br>          逻辑运算符: -a 数字 -o或   !非<br>          关系运算符: -gt大于  -ge大于等于   -lt小于  -le小于等于</p>
+<pre><code>条件语句:if  结构后跟着一个命令,如果要测试一个表达式,则必须要用[  expression  ] ,then放在命令或]之后,必须要用fi                                                               
+          if command          if [  expression  ]
+          then                      then
+          ...                          ...
+          elif command        elif [  expression  ]
+          then                      then
+          ...                          ...
+          else                      else
+          ..                           ...
+          fi                           fi
+
+       case命令结构:
+          case  variable_name in
+               pattern1)
+                    statements
+                         ;;
+               pattern2)
+                    statements
+                         ;;
+               *) default value
+                         ;;
+          esac
+</code></pre><p>循环语句: while until for  循环控制位continue break<br>               while command/[ expression ]<br>               do<br>               …<br>               done</p>
+<pre><code>until command/[ expression ]  #条件为假时执行
+do
+..
+done
+
+for 变量 in 数组等
+do
+...
+done
+</code></pre><p>文件测试:Bourne shell使用test命令对条件表达式求值<br>              -d 该文件是一个目录<br>              -f  该文件存在且不是一个目录<br>              -r  当前用户可以读这个文件<br>              -s  文件大小非0<br>              -w 当前用户可以写这个文件<br>              -x  当前用户可以执行这个文件</p>
+<h2 id="basename"><a href="#basename" class="headerlink" title="basename:"></a>basename:</h2><p>用法示例：</p>
+<p> $ basename /usr/bin/sort       输出”sort”。<br> $ basename ./include/stdio.h .h  输出”stdio”。</p>
+<p> 为basename指定一个路径，basename命令会删掉所有的前缀包括最后一个slash（‘/’）字符，然后将字符串显示出来</p>
+<p>date + %H 命令  获取当前时间加格式<br>$#剩余位置参数的个数</p>
+]]></content>
+      
+        <categories>
+            
+            <category> shell教程 </category>
+            
+        </categories>
+        
+        
+        <tags>
+            
+            <tag> shell </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>

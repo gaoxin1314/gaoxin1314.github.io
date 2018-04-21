@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="C360_2014-11-27-18-43-39-386">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="TensorFlow 机器学习 深度学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="TensorFlow学习及java调用 1.简介TensorFlow是谷歌基于DistBelief进行研发的第二代人工智能学习系统，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。TensorFlo">
+<meta name="keywords" content="TensorFlow 机器学习 深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow学习及java调用">
+<meta property="og:url" content="http://gaoxin1314.github.io/2018/03/31/TensorFlow学习及java调用/index.html">
+<meta property="og:site_name" content="gaoxin&#39;s blog">
+<meta property="og:description" content="TensorFlow学习及java调用 1.简介TensorFlow是谷歌基于DistBelief进行研发的第二代人工智能学习系统，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。TensorFlo">
+<meta property="og:updated_time" content="2018-04-04T13:42:35.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow学习及java调用">
+<meta name="twitter:description" content="TensorFlow学习及java调用 1.简介TensorFlow是谷歌基于DistBelief进行研发的第二代人工智能学习系统，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。TensorFlo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://gaoxin1314.github.io/2018/03/31/TensorFlow学习及java调用/"/>
+
+
+
+
+
+  <title>TensorFlow学习及java调用 | gaoxin's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?bf643417c950b107afb4d141162d91ae";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="C360_2014-11-27-18-43-39-386">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">gaoxin's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">gaoxin's blog</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Kategorien
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            Über
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Suche
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://gaoxin1314.github.io/2018/03/31/TensorFlow学习及java调用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="高鑫">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/gaoxin.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gaoxin's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">TensorFlow学习及java调用</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T13:21:08+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="TensorFlow学习及java调用"><a href="#TensorFlow学习及java调用" class="headerlink" title="TensorFlow学习及java调用"></a>TensorFlow学习及java调用</h1><hr>
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h2><p>TensorFlow是谷歌基于DistBelief进行研发的第二代人工智能学习系统，其命名来源于本身的运行原理。Tensor（张量）意味着N维数组，Flow（流）意味着基于数据流图的计算，TensorFlow为张量从流图的一端流动到另一端计算过程。TensorFlow是将复杂的数据结构传输至人工智能神经网中进行分析和处理过程的系统。<br>TensorFlow可被用于语音识别或图像识别等多项机器学习和深度学习领域，对2011年开发的深度学习基础架构DistBelief进行了各方面的改进，它可在小到一部智能手机、大到数千台数据中心服务器的各种设备上运行。TensorFlow将完全开源，任何人都可以用</p>
+<h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h2><p>这里介绍windows安装步骤,在windows中python必须使用3.5及以上的版本,首先安装python3.5及上版本(略),然后</p>
+<blockquote>
+<p>pip install tensorflow</p>
+</blockquote>
+<p>在python中使用:</p>
+<blockquote>
+<p>import tensorflow as tf</p>
+</blockquote>
+<h2 id="3-基础"><a href="#3-基础" class="headerlink" title="3.基础"></a>3.基础</h2><p>###3.1Tensor张量<br>Tensor是一个很重要的概念,在TensorFlow中所有的数据都用张量表示,从功能上看,张量可以被简单理解为多维数组.张量主要保存了三个属性:名字,维度和类型</p>
+<pre><code>import tensorflow as tf
+a = tf.constant([1.0, 2.0], name=&quot;a&quot;)
+b = tf.constant([2.0, 3.0], name=&quot;b&quot;)
+result = a + b
+print(result)
+</code></pre><p>###3.2会话的使用<br>会话(session)拥有管理TensorFlow程序运行时的所有资源,用来执行定义好的运算.</p>
+<pre><code>with tf.Session() as sess:
+    print(sess.run(result))
+</code></pre><p>###3.3变量Variable<br>当训练模型的时候，要用变量来存储和更新参数，变量包含张量（Tensor）存放于内存的缓存区，建模时它们需要被明确地初始化，模型训练后它们b必须被存储到磁盘。这些变量的值可在之后模型训练和分析时被加载。</p>
+<pre><code>w1= tf.Variable(tf.random_normal([2, 3], stddev=1, seed=1))
+w2= tf.Variable(tf.random_normal([3, 1], stddev=1, seed=1))
+x = tf.constant([[0.7, 0.9]]) 
+a = tf.matmul(x, w1)
+y = tf.matmul(a, w2)
+sess = tf.Session()
+sess.run(w1.initializer)  
+sess.run(w2.initializer)  
+print(sess.run(y))  
+sess.close()
+</code></pre><p>###3.3占位符placeholder<br>一个抽象的概念,是一种约束,规范输入或者输出等的数据的格式.</p>
+<pre><code>//规定x的类型,维度,和名称
+x = tf.placeholder(tf.float32, shape=(1, 2), name=&quot;input&quot;)
+a = tf.matmul(x, w1)
+y = tf.matmul(a, w2)
+
+sess = tf.Session()
+
+init_op = tf.global_variables_initializer()  
+sess.run(init_op)
+
+print(sess.run(y, feed_dict={x: [[0.7,0.9]]}))
+</code></pre><h2 id="4-深层神经网络"><a href="#4-深层神经网络" class="headerlink" title="4.深层神经网络"></a>4.深层神经网络</h2><p>维基百科对深度学习的精确定位：“一类通过多层非线性变换对高复杂性数据建模算法的合集”。可以看出深度学习有俩个重要的概念  <strong>多层 非线性</strong></p>
+<p>###4.1深层神经网络结构<br>分为输入层,隐藏层和输出层</p>
+<p>###4.2激活函数:实现去线性化<br>线性化只能解决线性可分问题,使用激活函数进行非线性化处理更加复杂的问题(无法通过直线或者更高维的平面解决)<br>TensorFlow提供7种不同的非线性激活函数,常用tf.nn.relu、tf.sigmoid和tf.tanh,<strong>每一层的输出都需要使用激活函数</strong></p>
+<pre><code>a = tf.nn.relu(tf.matmul(x,w1) + biases1)
+y = tf.nn.relu(tf.matmul(a,w2) + biases2)
+</code></pre><p>###4.3损失函数<br>神经网络模型的效果及优化的目标是通过损失函数来定义的,也及是说预测结果和实际结果对比,当损失函数值越小时,越接近真实值.</p>
+<p>预测输出值需要进行转换为概率通过softmax回归,再由损失函数计算值<br>常用</p>
+<pre><code>//y是预测值,y_是真实值,交叉熵和softmax回归
+cross_entropy = tf.nn.sofmax_cross_entropy_with_logit(y,y_)
+
+//均方误差损失函数
+mse = tf.reduce_mean(tf.square(y_ - y))
+
+//自定义损失函数
+//定义损失函数使得预测少了的损失大，于是模型应该偏向多的方向预测。
+loss_less = 10
+loss_more = 1
+loss = tf.reduce_sum(tf.where(tf.greater(y, y_), (y - y_) * loss_more, (y_ - y) * loss_less))
+</code></pre><p>###4.4神经网络优化算法<br><strong>通过梯度下降算法</strong> 和 <strong>反向传播</strong> 调整神经网络中参数的取值,梯度下降算法主要优化单个参数的取值,反向传播给出一个高效的方式在所有参数上使用梯度算法, <strong>反向传播是训练神经网络的核心算法</strong> </p>
+<pre><code>//神经网络优化算法,参数是学习率和损失函数
+train_op = tf.train.GradientDescentOptimizer(LEARNING_RATE).minimize(loss)
+</code></pre><p>###4.5指数学习率:控制参数更新的速度<br> 使用指数衰减的学习率，在迭代初期得到较高的下降速度，可以在较小的训练轮数下取得不错的收敛程度</p>
+<pre><code>TRAINING_STEPS = 100
+global_step = tf.Variable(0)
+LEARNING_RATE = tf.train.exponential_decay(0.1, global_step, 1, 0.96, staircase=True)
+
+x = tf.Variable(tf.constant(5, dtype=tf.float32), name=&quot;x&quot;)
+y = tf.square(x)
+train_op = tf.train.GradientDescentOptimizer(LEARNING_RATE).minimize(y, global_step=global_step)
+</code></pre><p>###4.6正则化:解决过拟合</p>
+<pre><code>//损失函数的计算和正则化
+regularizer = tf.contrib.layers.l2_regularizer(REGULARAZTION_RATE)
+regularaztion = regularizer(weights1) + regularizer(weights2)
+loss = cross_entropy_mean + regularaztion
+</code></pre><p>###4.7滑动平均模型<br>使模型在测试数据上更健壮的方法,在采用随机梯度算法训练神经网络时,使用滑动平均模型在很多应用中都可以一定程度提高最终模型在测试数据上的表现</p>
+<pre><code>//定义滑动平均模型
+import tensorflow as tf
+v1 = tf.Variable(0, dtype=tf.float32)
+step = tf.Variable(0, trainable=False)
+ema = tf.train.ExponentialMovingAverage(0.99, step)
+maintain_averages_op = ema.apply([v1])
+</code></pre><h2 id="5-全模型"><a href="#5-全模型" class="headerlink" title="5.全模型"></a>5.全模型</h2><pre><code># coding: utf-8
+
+# In[1]:
+
+
+import tensorflow as tf
+from tensorflow.examples.tutorials.mnist import input_data
+
+
+# #### 1.设置输入和输出节点的个数,配置神经网络的参数。
+
+# In[2]:
+
+
+INPUT_NODE = 784 # 输入节点
+OUTPUT_NODE = 10 # 输出节点
+LAYER1_NODE = 500# 隐藏层数节点数量   
+
+BATCH_SIZE = 100 # 每次batch打包的样本个数
+
+# 模型相关的参数
+LEARNING_RATE_BASE = 0.8  
+LEARNING_RATE_DECAY = 0.99
+REGULARAZTION_RATE = 0.0001   
+TRAINING_STEPS = 5000   
+MOVING_AVERAGE_DECAY = 0.99  
+
+
+# #### 2. 定义辅助函数来计算前向传播结果，使用ReLU做为激活函数。
+
+# In[3]:
+
+
+def inference(input_tensor, avg_class, weights1,     biases1, weights2, biases2,weights3,biases3):
+    # 不使用滑动平均类
+    if avg_class == None:
+        layer1 = tf.nn.relu(tf.matmul(input_tensor, weights1) + biases1)
+        layer2 = tf.nn.relu(tf.matmul(layer1, weights3) + biases3)
+           return tf.matmul(layer2, weights2) + biases2
+
+    else:
+        # 使用滑动平均类
+        layer1 = tf.nn.relu(tf.matmul(input_tensor, avg_class.average(weights1)) + avg_class.average(biases1))
+        layer2 = tf.nn.relu(tf.matmul(layer1, avg_class.average(weights3)) + avg_class.average(biases3))
+        return tf.matmul(layer2, avg_class.average(weights2)) + avg_class.average(biases2)  
+
+
+# #### 3. 定义训练过程。
+
+# In[4]:
+
+
+def train(mnist):
+    x = tf.placeholder(tf.float32, [None, INPUT_NODE], name=&apos;xinput&apos;)
+
+    y_ = tf.placeholder(tf.float32, [None, OUTPUT_NODE], name=&apos;yinput&apos;)
+    # 生成隐藏层的参数。
+    weights1 = tf.Variable(tf.truncated_normal([INPUT_NODE, LAYER1_NODE], stddev=0.1))
+    biases1 = tf.Variable(tf.constant(0.1, shape=[LAYER1_NODE]))
+    # 生成隐藏层的参数。
+    weights3 = tf.Variable(tf.truncated_normal([LAYER1_NODE, 200], stddev=0.1))
+    biases3 = tf.Variable(tf.constant(0.1, shape=[200]))
+    # 生成输出层的参数。
+    weights2 = tf.Variable(tf.truncated_normal([LAYER1_NODE, OUTPUT_NODE], stddev=0.1))
+    biases2 = tf.Variable(tf.constant(0.1, shape=[OUTPUT_NODE]))
+
+    # 计算不含滑动平均类的前向传播结果
+    #y = inference(x, None, weights1, biases1, weights2, biases2,weights3,biases3)
+    layer1 = tf.nn.relu(tf.matmul(x, weights1) + biases1)
+    #layer2 = tf.nn.relu(tf.matmul(layer1, weights3) + biases3)
+    y = tf.add(tf.matmul(layer1, weights2), biases2, name=&apos;y_conv_add&apos;)
+
+
+    # 定义训练轮数及相关的滑动平均类 
+    global_step = tf.Variable(0, trainable=False)
+    variable_averages = tf.train.ExponentialMovingAverage(MOVING_AVERAGE_DECAY, global_step)
+    variables_averages_op = variable_averages.apply(tf.trainable_variables())
+    layer3 = tf.nn.relu(tf.matmul(x, variable_averages.average(weights1)) + variable_averages.average(biases1))
+    average_y = tf.add(tf.matmul(layer3, weights2), biases2, name=&apos;averagey_conv_add&apos;)
+       # average_y = inference(x, variable_averages, weights1, biases1, weights2, biases2,weights3,biases3)
+
+    # 计算交叉熵及其平均值
+    cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=y, labels=tf.argmax(y_, 1))
+    cross_entropy_mean = tf.reduce_mean(cross_entropy)
+
+    # 损失函数的计算和正则化
+    regularizer = tf.contrib.layers.l2_regularizer(REGULARAZTION_RATE)
+    regularaztion = regularizer(weights1) + regularizer(weights2)
+    loss = cross_entropy_mean + regularaztion
+
+    # 设置指数衰减的学习率。
+    learning_rate = tf.train.exponential_decay(
+    LEARNING_RATE_BASE,
+    global_step,
+    mnist.train.num_examples / BATCH_SIZE,
+    LEARNING_RATE_DECAY,
+    staircase=True)
+
+    # 优化损失函数
+    train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss, global_step=global_step)
+
+    # 反向传播更新参数和更新每一个参数的滑动平均值
+    &quot;&quot;&quot;定义一个控制依赖，并返回一个上下文管理器
+    with g.control_dependencies([a, b, c]):
+    # `d` 和 `e` 将在 `a`, `b`, 和`c`执行完之后运行.
+    d = …
+    e = …
+    &quot;&quot;&quot;
+    with tf.control_dependencies([train_step, variables_averages_op]):
+    train_op = tf.no_op(name=&apos;train&apos;)#tf.no_op；什么也不做
+
+    # 计算正确率
+    correct_prediction = tf.equal(tf.argmax(average_y, 1), tf.argmax(y_, 1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+
+    # 初始化会话，并开始训练过程。
+    with tf.Session() as sess:
+        tf.global_variables_initializer().run()
+        validate_feed = {x: mnist.validation.images, y_: mnist.validation.labels}
+        test_feed = {x: mnist.test.images[1:2], y_: mnist.test.labels[1:2]} 
+
+        # 循环的训练神经网络。
+        for i in range(TRAINING_STEPS):
+            if i % 1000 == 0:
+                validate_acc = sess.run(accuracy, feed_dict=validate_feed)
+                print(&quot;After %d training step(s), validation accuracy using average model is %g &quot; % (i, validate_acc))
+
+            xs,ys=mnist.train.next_batch(BATCH_SIZE)
+            sess.run(train_op,feed_dict={x:xs,y_:ys})
+
+        test_acc=sess.run(average_y,feed_dict=test_feed)
+        print(test_feed)
+        print(test_acc)
+        # 保存二进制模型  
+        output_graph_def = tf.graph_util.convert_variables_to_constants(sess, sess.graph_def, output_node_names=[&apos;y_conv_add&apos;])  
+        with tf.gfile.FastGFile(&apos;datasets/logs/mnist.pb&apos;, mode=&apos;wb&apos;) as f:  
+            f.write(output_graph_def.SerializeToString())
+
+
+# #### 4. 主程序入口，这里设定模型训练次数为5000次。
+
+# In[5]:
+
+
+def main(argv=None):
+    mnist = input_data.read_data_sets(&quot;datasets/MNIST_data&quot;, one_hot=True)
+    train(mnist)
+
+if __name__==&apos;__main__&apos;:
+    main()
+</code></pre><h2 id="6-java调用模型"><a href="#6-java调用模型" class="headerlink" title="6.java调用模型"></a>6.java调用模型</h2><pre><code>package shuzishibie;
+
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.awt.print.Printable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import org.tensorflow.Operation;
+import org.tensorflow.Output;
+import org.tensorflow.Shape;
+
+import com.test.tensorflow.ChineseRecognition2;
+import com.test.tensorflow.TensorFlowInferenceInterface;
+
+
+public class ImgShibie {
+    public static void getData(String path){
+        //只是测试数据,不要在意
+        double[] shuzi = { 0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.45490199,
+         0.49019611,  0.67058825,  1.,  1.,  0.58823532,
+         0.36470589,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0.66274512,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.85490203,  0.11764707,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0.66274512,  0.99215692,
+         0.99215692,  0.99215692,  0.83529419,  0.55686277,  0.6901961 ,
+         0.99215692,  0.99215692,  0.4784314 ,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.20392159,  0.98039222,  0.99215692,  0.82352948,  0.1254902 ,
+         0.04705883,  0,  0.02352941,  0.80784321,  0.99215692,
+         0.54901963,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0.3019608 ,  0.98431379,
+         0.82352948,  0.09803922,  0,  0,  0,
+         0.4784314 ,  0.97254908,  0.99215692,  0.25490198,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.12156864,  0.07058824,  0,
+         0,  0,  0,  0.81960791,  0.99215692,
+         0.99215692,  0.25490198,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.45882356,  0.96862751,  0.99215692,  0.77647066,  0.03921569,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.29803923,  0.96862751,  0.99215692,
+         0.90588242,  0.24705884,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.50196081,  0.99215692,  0.99215692,  0.56470591,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.6901961 ,  0.96470594,  0.99215692,
+         0.62352943,  0.04705883,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.09803922,
+         0.91764712,  0.99215692,  0.91372555,  0.13725491,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.77647066,  0.99215692,  0.99215692,
+         0.5529412 ,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.30588236,
+         0.97254908,  0.99215692,  0.74117649,  0.04705883,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0.07450981,  0.7843138 ,  0.99215692,  0.99215692,
+         0.5529412 ,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0.52549022,
+         0.99215692,  0.99215692,  0.67843139,  0.04705883,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0.97254908,  0.99215692,  0.99215692,
+         0.09803922,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.97254908,  0.99215692,  0.99215692,  0.16862746,  0.07843138,
+         0.07843138,  0.07843138,  0.07843138,  0.01960784,  0,
+         0.01960784,  0.07843138,  0.07843138,  0.14509805,  0.58823532,
+         0.58823532,  0.58823532,  0.57647061,  0.03921569,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0.97254908,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.65882355,  0.56078434,  0.65098041,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.48235297,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0.68235296,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.99215692,  0.99215692,
+         0.99215692,  0.99215692,  0.99215692,  0.97647065,  0.96862751,
+         0.96862751,  0.66274512,  0.45882356,  0.45882356,  0.22352943,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0.46274513,  0.48235297,  0.48235297,  0.48235297,  0.65098041,
+         0.99215692,  0.99215692,  0.99215692,  0.60784316,  0.48235297,
+         0.48235297,  0.16078432,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0,  0,
+         0,  0,  0,  0};
+
+    //需要jdk1.8并且是64位
+    System.load(&quot;D:\\tensorflow_jni.dll&quot;);
+    //参数1.模型路径,2.可以自己命名,看了下源码没感觉用处
+    TensorFlowInferenceInterface tfi = new TensorFlowInferenceInterface(&quot;D:\\mnist.pb&quot;,&quot;imageType&quot;);
+    //模型输出名称y_conv_add
+    final Operation operation = tfi.graphOperation(&quot;y_conv_add&quot;);  
+    Output output = operation.output(0);  
+    Shape shape = output.shape();  
+    final int numClasses = (int) shape.size(1); 
+    ChineseRecognition2 ch = new ChineseRecognition2();
+//    float[] floatValues = ch.getImagePixel(&quot;D:\\one.jpg&quot;); //将图片处理为输入对应张量格式,如果模型数据量足够大,可以自己画图片测试  
+    float[] float1 = new float[shuzi.length];
+    for (int i = 0; i &lt; shuzi.length; i++) {
+                    float1[i] = (float) shuzi[i];
+                }
+
+    tfi.feed(&quot;xinput&quot;, float1, 1, 784); //将数据复制给输入张量x_input即为模型定义时的x名称  
+    tfi.run(new String[] { &quot;y_conv_add&quot; }, false);//输出张量  
+    float[] outPuts = new float[numClasses];//结果分类  
+    tfi.fetch(&quot;y_conv_add&quot;, outPuts);//接收结果 outPuts保存的即为预测结果对应的概率，最大的一个通常为本次预测结果  
+    float f = outPuts[0];
+    int num = 0;
+    for (int i = 0; i &lt; outPuts.length; i++) {
+        if (f &lt; outPuts[i]) {
+                        f = outPuts[i];
+                        num = i;
+                    }
+
+                }
+    System.out.println(f);
+    //预测数字是多少
+    System.out.println(num);
+
+    }
+    public static void main(String[] args) {
+        ImgShibie.getData(&quot;&quot;);
+    }
+
+}
+</code></pre><p>详细代码在git中地址:<a href="https://github.com/gaoxin1314/TensorFlow_java.git" target="_blank" rel="external">https://github.com/gaoxin1314/TensorFlow_java.git</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpg" alt="高鑫 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/aipay.jpg" alt="高鑫 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TensorFlow-机器学习-深度学习/" rel="tag"># TensorFlow 机器学习 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/31/java内存区域/" rel="next" title="java内存区域(内存结构划分)">
+                <i class="fa fa-chevron-left"></i> java内存区域(内存结构划分)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/31/Bourne-shell编程/" rel="prev" title="Bourne shell编程">
+                Bourne shell编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+       
+         <div onclick="ShowGitment()" id="gitment-display-button">Show comments from Gitment</div>
+         <div id="gitment-container" style="display:none"></div>
+       
+
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/gaoxin.jpg"
+               alt="高鑫" />
+          <p class="site-author-name" itemprop="name">高鑫</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Kategorien</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/gaoxin1314.github.io" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/gao-xin-37-77-23" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorFlow学习及java调用"><span class="nav-number">1.</span> <span class="nav-text">TensorFlow学习及java调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简介"><span class="nav-number">1.1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装"><span class="nav-number">1.2.</span> <span class="nav-text">2.安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-基础"><span class="nav-number">1.3.</span> <span class="nav-text">3.基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-深层神经网络"><span class="nav-number">1.4.</span> <span class="nav-text">4.深层神经网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-全模型"><span class="nav-number">1.5.</span> <span class="nav-text">5.全模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-java调用模型"><span class="nav-number">1.6.</span> <span class="nav-text">6.java调用模型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">高鑫</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+   
+   
+   
+   
+   <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+   
+       <script type="text/javascript">
+           function ShowGitment(){
+               document.getElementById("gitment-display-button").style.display = "none";
+               document.getElementById("gitment-container").style.display = "block";
+               var gitment = new Gitment({
+                   id: document.location.href, 
+                   owner: 'gaoxin1314',
+                   repo: 'fantastic.github.io',
+                   oauth: {
+                       client_id: '90662e32c692de1965a2',
+                       client_secret: 'dac6732a7af5c7a964349db8ea2b3afd11709120',
+                   }});
+               gitment.render('gitment-container');
+           }
+       </script>
+   
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
